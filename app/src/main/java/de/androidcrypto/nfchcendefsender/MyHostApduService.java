@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
+import android.nfc.cardemulation.CardEmulation;
 import android.nfc.cardemulation.HostApduService;
 import android.os.Bundle;
 import android.util.Log;
@@ -159,6 +160,7 @@ public class MyHostApduService extends HostApduService {
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             Log.i(TAG, "NDEF message: " + new String(NDEF_URI_BYTES));
+            Log.i(TAG, "NDEF message length: " + NDEF_URI_BYTES.length);
         } else {
             Log.i(TAG, "NDEF text is empty");
             return START_REDELIVER_INTENT;
@@ -256,9 +258,9 @@ public class MyHostApduService extends HostApduService {
             //Log.i(TAG, NDEF_URI.toString());
             Log.i(TAG, new String(NDEF_URI_BYTES));
             Log.i(TAG, "NDEF_READ_BINARY_GET_NDEF triggered. Our Response: " + Utils.bytesToHex(response));
-
+            Log.i(TAG, "NDEF_READ_BINARY_GET_NDEF response length: " + response.length);
             Context context = getApplicationContext();
-            CharSequence text = "NDEF text has been sent to the reader!";
+            CharSequence text = "NDEF text has been sent to the reader, length is " + response.length;
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
             toast.setGravity(Gravity.CENTER, 0, 0);

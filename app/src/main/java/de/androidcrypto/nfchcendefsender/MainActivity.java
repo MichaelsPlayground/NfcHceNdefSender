@@ -47,6 +47,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button setNdef100 = (Button) findViewById(R.id.set_ndef100_button);
+        setNdef100.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //
+                // Technically, if this is past our byte limit,
+                // it will cause issues.
+                //
+                // TODO: add validation
+                //
+                String characters66 = "";
+                for (int i = 0; i < 66; i++) {
+                    characters66 = characters66 + "A";
+                }
+                String test = characters66 + " on " +
+                        getTimestamp();
+                Intent intent = new Intent(view.getContext(), MyHostApduService.class);
+                intent.putExtra("ndefMessage", test);
+                System.out.println("*** start ***");
+                startService(intent);
+            }
+        });
+
+        Button setNdef500 = (Button) findViewById(R.id.set_ndef500_button);
+        setNdef500.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //
+                // Technically, if this is past our byte limit,
+                // it will cause issues.
+                //
+                // TODO: add validation
+                //
+                String characters66 = "";
+                for (int i = 0; i < 466; i++) {
+                    characters66 = characters66 + "A";
+                }
+                String test = characters66 + " on " +
+                        getTimestamp();
+                Intent intent = new Intent(view.getContext(), MyHostApduService.class);
+                intent.putExtra("ndefMessage", test);
+                System.out.println("*** start ***");
+                startService(intent);
+            }
+        });
     }
 
     public static String getTimestamp() {
