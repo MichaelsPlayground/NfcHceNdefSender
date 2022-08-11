@@ -1,8 +1,16 @@
 # NFC HCE NDEF Sender
 
-This app emulates a NFC tag with a NDEF message.
+This app emulates a class 4 type NFC tag with an NDEF message.
 
 For reading the emulated tag you need a second application: NfcHceNdefReader
+
+The tag is accessible with the IsoDep protocol so it needs a fixed application id (AID) - 
+this is set in the apduservice.xml with the value "F0394148148100".
+
+Additionally this value is set in the "APDU_SELECT" method of MyHostApduService.java file.
+
+Both values need to be the same on sender AND reader side to get a connection - change these values 
+on your own risk :-)
 
 AndroidManifest.xml:
 ```plaintext
@@ -25,7 +33,7 @@ AndroidManifest.xml:
     </application>
 ```
 
-This file is located in res/xml/apduservice.xml:
+This resource file is located in res/xml/apduservice.xml:
 
 apduservice.xml:
 ```plaintext
