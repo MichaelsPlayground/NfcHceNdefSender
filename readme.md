@@ -12,6 +12,8 @@ Additionally this value is set in the "APDU_SELECT" method of MyHostApduService.
 Both values need to be the same on sender AND reader side to get a connection - change these values 
 on your own risk :-)
 
+Both apps (sender and reader) were tested on real Samsung devices with Android 9 and 12.
+
 AndroidManifest.xml:
 ```plaintext
     <uses-permission android:name="android.permission.NFC" />
@@ -47,16 +49,4 @@ apduservice.xml:
         <aid-filter android:name="F0394148148100" />
     </aid-group>
 </host-apdu-service>
-```
-
-
-
-```plaintext
-
-```
-
-
-
-```plaintext
-
 ```
