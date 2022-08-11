@@ -12,6 +12,9 @@ Additionally this value is set in the "APDU_SELECT" method of MyHostApduService.
 Both values need to be the same on sender AND reader side to get a connection - change these values 
 on your own risk :-)
 
+This app is based on the work of Justin Ribeiro who provided the basics for the MyApduService part,  
+here is the original source: https://github.com/justinribeiro/android-hostcardemulation-sample
+
 Both apps (sender and reader) were tested on real Samsung devices with Android 9 and 12.
 
 AndroidManifest.xml:
