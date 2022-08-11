@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
-import android.nfc.cardemulation.CardEmulation;
 import android.nfc.cardemulation.HostApduService;
 import android.os.Bundle;
 import android.util.Log;
@@ -109,17 +108,6 @@ public class MyHostApduService extends HostApduService {
             (byte)0x04
     };
 
-    /*
-    private NdefRecord NDEF_URI = new NdefRecord(
-            NdefRecord.TNF_WELL_KNOWN,
-            NdefRecord.RTD_TEXT,
-            NDEF_ID,
-            "Hello world!".getBytes(Charset.forName("UTF-8"))
-    );
-    */
-
-    //private byte[] NDEF_URI_BYTES = NDEF_URI.toByteArray();
-    //private byte[] NDEF_URI_BYTES = NDEF_URI.toByteArray();
     private byte[] NDEF_URI_BYTES = getNdefMessage("Hello world!");
     private byte[] NDEF_URI_LEN = BigInteger.valueOf(NDEF_URI_BYTES.length).toByteArray();
 
@@ -139,16 +127,6 @@ public class MyHostApduService extends HostApduService {
 
         if (intent.hasExtra("ndefMessage")) {
             Log.i(TAG, "NDEF will be created and HostApduService runs");
-            /* old / org
-            NDEF_URI = new NdefRecord(
-                    NdefRecord.TNF_WELL_KNOWN,
-                    NdefRecord.RTD_TEXT,
-                    NDEF_ID,
-                    intent.getStringExtra("ndefMessage").getBytes(Charset.forName("UTF-8"))
-            );
-            NDEF_URI_BYTES = NDEF_URI.toByteArray();
-            NDEF_URI_LEN = BigInteger.valueOf(NDEF_URI_BYTES.length).toByteArray();
-            */
             // here we are using the NDEF message + record to create ndef data
             NDEF_URI_BYTES = getNdefMessage(intent.getStringExtra("ndefMessage"));
             NDEF_URI_LEN = BigInteger.valueOf(NDEF_URI_BYTES.length).toByteArray();
@@ -166,7 +144,6 @@ public class MyHostApduService extends HostApduService {
             return START_REDELIVER_INTENT;
         }
 
-        //Log.i(TAG, "onStartCommand() | NDEF" + NDEF_URI.toString());
         Log.i(TAG, "onStartCommand() | NDEF" + new String(NDEF_URI_BYTES));
 
         //return 0;
